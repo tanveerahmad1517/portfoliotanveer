@@ -4,7 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+Django = "*"
+django-storages = "*"
 request = "*"
+django-heroku = "*"
+whitenoise = "*"
+Pillow = "*"
+certifi = "*"
+dj-database-url = "*"
+cloudinary = "*"
+
+         
 
 [dev-packages]
 

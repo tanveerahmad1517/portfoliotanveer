@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='artwork',
             name='group',
-            field=models.ForeignKey(to='gallery.Group'),
+            field=models.ForeignKey(to='gallery.Group', on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

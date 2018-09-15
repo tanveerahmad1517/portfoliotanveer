@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='artwork',
             name='group',
-            field=models.ForeignKey(to='gallery.GalleryGroup'),
+            field=models.ForeignKey(to='gallery.GalleryGroup', on_delete=models.CASCADE),
         ),
         migrations.DeleteModel(
             name='Group',

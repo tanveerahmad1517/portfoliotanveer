@@ -1,27 +1,50 @@
 {% extends 'gallery/base.html' %}
+{% load static %}
 {% block content %} 
 
     <div class="container">
-        {% if artworks %}
         <div class="row">
-            <div class="col-md-10">        
-                <h1> {{ galleryGroups.title }} Gallery </h1>
-                <p>{{ galleryGroups.description|linebreaks }} </p>
-                <p>Click an image to view further details.</p>
-            </div>
-        </div> 
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('#lightgallery').lightGallery();
+        });
+        </script>
+        <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+        <script src="{% static 'js/lightgallery/lightgallery-all.min.js' %}"></script>
+        <script src="{% static 'js/lightgallery/jquery.mousewheel.min.js' %}"></script>
+<!-- Light Gallery End-->
 
-        <div class="row" id='art-images'>
-            {% for artwork in artworks %}
 
-            <div class="col-lg-4 col-md-6 col-xs-12 thumb image-box">
-                <a class="thumbnail" href='{% url "art" art_id=artwork.id %}'>
-                    <img class="img-responsive" src="{{ artwork.art.url }}" alt="{{ artwork.title }}">
-                </a>
-            </div>
-            {% endfor %}
-        </div> <!-- row -->
-        {% else %}  
+
+ {% if artworks %}
+       
+<div class="demo-gallery">
+    
+            <ul id="lightgallery" class="list-unstyled row">
+                {% for artwork in artworks %}
+
+                <li data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="{{ artwork.art.url }}" data-sub-html="<h2> {{ artwork.title }} </h2> <h2> <p>{{ artwork.description|linebreaks }} <h4><a href='{% url "art" art_id=artwork.id %}' target='_blank'>Go Detail</a>  <span> Or <a href='{{ artwork.link }}'>Visit Website</a></span></h4></p>">
+
+                    
+                         <div class="grid">
+          <figure class="effect-jazz">
+
+                        <img class="img-responsive" src="{{ artwork.art.url }}">
+                        <figcaption>
+              <h2> {{ artwork.title }} </h2>
+
+             
+          </figcaption></figure>
+
+                   
+                </li>
+                
+
+       
+                 {% endfor %}
+        
+            </ul>
+{% else %}  
 
             <div class="row">
                 <div class="col-md-10">  
@@ -29,7 +52,10 @@
                     <p>No galleries with that name found.</p>
                 </div>
             </div>
-        {% endif %}
-        </div> <!-- container -->
-
+            {% endif %}
 {% endblock content %}
+
+
+
+
+

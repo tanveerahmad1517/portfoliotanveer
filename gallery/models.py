@@ -1,13 +1,21 @@
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template.defaultfilters import slugify
 
+from django.utils import timezone
+
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
+import cloudinary
+# Create your models here.
+from cloudinary.models import CloudinaryField
 
 class GalleryGroup(models.Model):
 
     title = models.CharField(max_length=100, default='')
     description = models.TextField()
     slug = models.SlugField(unique=True)
+    galleryimage = CloudinaryField("galleryimage")
 
     def __str__(self):
         return self.title
@@ -23,9 +31,10 @@ class GalleryGroup(models.Model):
 class Artwork(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    published_date = models.DateTimeField(blank=True)
-    art = models.ImageField(upload_to="art")
-    group = models.ForeignKey('GalleryGroup')
+    link = models.URLField(max_length=200)
+    published_date = models.DateTimeField(default=timezone.now)
+    art = CloudinaryField("art")
+    group = models.ForeignKey('GalleryGroup', on_delete=models.CASCADE)
 
     def publish(self):
         self.save()

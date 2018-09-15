@@ -1,0 +1,48 @@
+{% extends 'gallery/base.html' %}
+{% load static %}
+{% block content %} 
+
+    <div class="container">
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('#lightgallery').lightGallery();
+        });
+        </script>
+        <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+        <script src="{% static 'js/lightgallery/lightgallery-all.min.js' %}"></script>
+        <script src="{% static 'js/lightgallery/jquery.mousewheel.min.js' %}"></script>
+<!-- Light Gallery End-->
+
+
+
+
+<div class="demo-gallery">
+    
+            <ul id="lightgallery" class="list-unstyled row">
+                {% for artwork in artworks %}
+
+                <li data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="{{ artwork.art.url }}" data-sub-html="<h4> {{ artwork.title }} </h4><p>{{ artwork.description|linebreaks }}</p>">
+                    
+                         <div class="grid">
+          <figure class="effect-jazz">
+
+                        <img class="img-responsive" src="{{ artwork.art.url }}">
+                        <figcaption>
+              <h2> {{ artwork.title }} </h2>
+
+             
+          </figcaption></figure>
+
+                   
+                </li>
+                 {% endfor %}
+        
+            </ul>
+
+{% endblock content %}
+
+
+
+
+

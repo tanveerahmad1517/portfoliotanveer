@@ -8,6 +8,8 @@ django-storages = "*"
 cloudinary = "*"
 django = "*"
 request = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.6"

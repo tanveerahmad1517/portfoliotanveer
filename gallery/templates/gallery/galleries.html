@@ -157,7 +157,7 @@
             <figcaption>
               <h2> {{ galleryGroup.title }} </h2>
               <a href="#"><i class="fa fa-fw fa-share"></i></a>
-               <p>{{ galleryGroup.description|linebreaks }} </p>
+               <p>{{ galleryGroup.description|linebreaks|slice:":80" }} </p>
               <a 
                 href='{% url 'gallery_detail' gallery_title_slug=galleryGroup.slug %}'> View {{ galleryGroup.title }} 
               </a>

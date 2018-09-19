@@ -32,7 +32,8 @@
             <li><i class="fas fa-map-marker-alt"></i> {{ page_user.profile.location }}</li>
           {% endif %}
           {% if page_user.profile.url %}
-            <li><i class="fas fa-browser"> <a href="{{ page_user.profile.url }}" target="_blank">{{ page_user.profile.url }}</a></i></li>
+            <li><i class="fas fa-browser"> 
+              <a href="{{ page_user.profile.url }}" target="_blank"> Website </a></i></li>
           {% endif %}
           {% if page_user.profile.gender == 'Male' %}
           <li><i class="fas fa-male"></i> <b> Mister </b> {{ page_user.profile.gender }}</li>

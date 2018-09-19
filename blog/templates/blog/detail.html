@@ -1,5 +1,5 @@
 {% extends "gallery/base.html" %}
-
+{% load humanize %}
 {% block title %} {{ course.title }} {% endblock %}
 {% block content %}
 
@@ -7,10 +7,13 @@
  <div class="row">
  	<div class="col-sm-8 col-md-8">
  		 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                    <div class="avatar"><img src="https://d19m59y37dris4.cloudfront.net/blog/1-2/img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                    <div class="title"><span>John Doe</span></div></a>
-                  <div class="date"> <i class="far fa-clock"> </i> </div>
-                  <div class="comments"><i class="fas fa-pencil-alt"></i></i>Tanveer Ahmed</div>
+                  <div class="avatar"> 
+                        <a href="{% url 'posts:profile' post.user.username %}"> <img src="{{ post.user.profile.get_picture.url }}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{ post.user.profile.get_screen_name }} 
+                        </a></span>
+                  </div></a>
+                  <div class="date"> <i class="far fa-clock"> </i> <time> {{ post.date|naturaltime }}  </time> </div>
+                  
                 </footer>
     <div class="cover_img">
          <img src="{{ post.image.url }}"class="postcover">

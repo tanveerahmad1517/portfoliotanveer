@@ -41,7 +41,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'posts/post_create.html'
 
 posts_NUM_PAGES = 10
-@login_required(login_url='/login/')
+
 def profile(request, username):
     page_user = get_object_or_404(User, username=username)
     all_posts = Post.objects.filter(user=page_user)

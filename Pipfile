@@ -1,15 +1,25 @@
 [[source]]
-url = "https://pypi.org/simple"
+url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-[packages]
-django-storages = "*"
-cloudinary = "*"
-django = "*"
-request = "*"
-gunicorn = "*"
-django-heroku = "*"
-
 [requires]
-python_version = "3.6"
+python_version = "*"
+
+[packages]
+"psycopg2-binary" = "*"
+django-heroku = "*"
+gunicorn = "*"
+Pillow = "*"
+dj-database-url = "*"
+django-taggit = "*"
+six = "*"
+social-auth-app-django = "*"
+sorl-thumbnail = "*"
+whitenoise = "*"
+redis = "*"
+django-crispy-forms = "*"
+request = "*"
+social-auth-core = "*"
+
+[dev-packages]

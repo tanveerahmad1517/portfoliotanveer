@@ -1,10 +1,15 @@
 
-body {
-    padding-top: 60px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-}
 
-.thumb {
+body {
+    font-family: "Open Sans",sans-serif !important;
     margin-top: 5px;
+    padding-top: 60px; 
+}
+body.home p, h1, h2, h3, h4, h5, span {
+    font-family: sans-serif;
+}
+p {
+        font-size: 16px !important;
 }
 
 .image-box { 
@@ -145,4 +150,89 @@ img.profile {
 figure.effect-jazz img {
     width: 100%;
     height: 297px;
+}
+.avatar img {
+    max-width: 40px;
+    min-width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.d-flex {
+    display: -ms-flexbox!important;
+    display: flex!important;
+}
+.fa-pencil-alt:before {
+    content: "\f303";
+    display: inline-block;
+    margin: 0px 6px 0px 15px;
+    font-size: 0.9em;
+    color: #ccc;
+}
+.fa-clock:before {
+    content: "\f017";
+    display: inline-block;
+    margin: 0px 0px 0px 11px;
+    font-size: 0.9em;
+    color: #ccc;
+}
+.post_image img {
+    width: 40%;
+    float: right;
+    margin: .75em 0 .75em 2em;
+}
+h4.header {
+    margin: 0px;
+}
+
+
+footer.post-footer.d-flex.align-items-center {
+    margin: 6px 0;
+    padding: 16px 0px 8px 0px;
+}
+.avatar {
+    margin-top: -13px;
+}
+
+.post_col {
+    margin-bottom: 51px;
+}
+  
+.cover_img img {
+    width: 100%;
+    height: 315px;
+}
+img.picture {
+    width: 256px;
+    border-radius: 50%;
+}
+
+footer.post_header_profile ul li {
+    display: inline-block;
+    padding: 0px 0px 0px 15px;
+}
+
+footer.post_header_profile {
+    float: right;
+    position: relative;
+    right: 49%;
+    top: 134px;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+
+
+
+@media only screen and (max-width: 600px) { 
+
+footer.post_header_profile {
+float: none;
+    position: static;
+
+        margin: 0;
+    padding: 0;
+}
 }

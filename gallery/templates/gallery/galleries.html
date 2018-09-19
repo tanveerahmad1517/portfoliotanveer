@@ -99,22 +99,22 @@
         </div>
         <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;">
             <div>
+                <img data-u="image" src="{% static 'images/slider1.jpg' %}" />
+            </div>
+            <div>
                 <img data-u="image" src="{% static 'images/slider2.jpg' %}" />
             </div>
             <div>
                 <img data-u="image" src="{% static 'images/slider3.jpg' %}" />
-            </div>
-            <div>
-                <img data-u="image" src="{% static 'images/slider1.jpg' %}" />
-                <div style="position:absolute;top:30px;left:30px;width:480px;height:183px;z-index:0;background-color:rgba(255,188,5,0.8);font-size:40px;font-weight:100;color:#000000;line-height:60px;padding:5px;box-sizing:border-box;">Share is Care
+                <div style="position:absolute;top:30px;left:30px;width:480px;height:130px;z-index:0;background-color:rgba(255,188,5,0.8);font-size:40px;font-weight:100;color:#000000;line-height:60px;padding:5px;box-sizing:border-box;">TOUCH SWIPE
 <br />
-                    Share you like with you love
+                    RESPONSIVE SLIDER
                 </div>
-                <div style="position:absolute;top:300px;left:30px;width:480px;height:130px;z-index:0;background-color:rgba(255,188,5,0.8);font-size:30px;color:#000000;line-height:38px;padding:5px;box-sizing:border-box;">Hello World Welome to my Website </div>
+                <div style="position:absolute;top:300px;left:30px;width:480px;height:130px;z-index:0;background-color:rgba(255,188,5,0.8);font-size:30px;color:#000000;line-height:38px;padding:5px;box-sizing:border-box;">Build your slider with anything, includes image, svg, text, html, photo, picture content</div>
             </div>
             <div style="background-color:#ff7c28;">
-                <div style="position:absolute;top:50px;left:50px;width:450px;height:62px;z-index:0;font-size:16px;color:#000000;line-height:24px;text-align:left;padding:5px;box-sizing:border-box;">Photos in this slider are Its dummy Contents of the Slider<br />
-                    ue eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet 
+                <div style="position:absolute;top:50px;left:50px;width:450px;height:62px;z-index:0;font-size:16px;color:#000000;line-height:24px;text-align:left;padding:5px;box-sizing:border-box;">Photos in this slider are to demostrate jssor slider,<br />
+                    which are not licensed for any other purpose.
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@
             <figcaption>
               <h2> {{ galleryGroup.title }} </h2>
               <a href="#"><i class="fa fa-fw fa-share"></i></a>
-               <p>{{ galleryGroup.description|linebreaks|slice:":80" }} </p>
+               <p>{{ galleryGroup.description|linebreaks }} </p>
               <a 
                 href='{% url 'gallery_detail' gallery_title_slug=galleryGroup.slug %}'> View {{ galleryGroup.title }} 
               </a>

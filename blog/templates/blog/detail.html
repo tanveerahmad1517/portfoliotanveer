@@ -1,11 +1,24 @@
 {% extends "gallery/base.html" %}
 {% load humanize %}
+{% load namify %}
+{% load urlify %}
 {% block title %} {{ course.title }} {% endblock %}
 {% block content %}
 
 <div class="container">
  <div class="row">
  	<div class="col-sm-8 col-md-8">
+  <ul class="breadcrumb">
+          <li> <a href="/" class="breadcrumb">Home </a> </li>
+            {% for i in post.category.get_slug_list %}
+          <li> <a class="breadcrumb" href="/category/{{ i }}">
+            {{ i | get_name }} </a> </li>
+            {% endfor %}
+          <li> <span> </li>
+            {{ post.title | safe |slice:"70"  }} </span> 
+  </ul>
+    
+  
  		 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                   <div class="avatar"> 
                         <a href="{% url 'posts:profile' post.user.username %}"> <img src="{{ post.user.profile.get_picture.url }}" alt="..." class="img-fluid"></div>

@@ -44,3 +44,11 @@ class Artwork(models.Model):
 
     def get_absolute_url(self):
         return reverse('gallery.views.art_detail', args=[str(self.id)])
+
+
+
+class Subscribe(models.Model):
+  email_id = models.EmailField(null = True, blank = True)
+  timestamp = models.DateTimeField(default=timezone.now)
+  def __str__(self):
+    return self.email_id

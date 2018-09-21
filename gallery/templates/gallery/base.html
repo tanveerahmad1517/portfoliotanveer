@@ -1,4 +1,6 @@
 {% load staticfiles %}
+{% load namify %}
+{% load urlify %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -188,6 +190,9 @@
                     <li><a href="{% url 'gallery_detail' gallery_title_slug='django-apps-gallery-1' %}">Django apps</a></li>
                     <li><a href="{% url 'gallery_detail' gallery_title_slug='django-social-network-apps-gallery2' %}">Django Social</a></li>
                     <li><a href="{% url 'gallery_detail' gallery_title_slug='its-dummy-gallery-3' %}">Gallery 3</a></li>
+                    <li><a href="{% url 'gallery_detail' gallery_title_slug='its-dummy-gallery-3' %}">Gallery 3</a></li>
+
+
 
             </ul>
                 
@@ -198,12 +203,16 @@
             <li>
                 <a href="{% url 'posts:all' %}"<i class="fab fa-blogger-b"></i> Blog </a>
             </li>
+            <li>
+                <a href="{% url 'contact' %}"<i class="fas fa-phone-volume"></i> Contact Me </a>
+            </li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div>
         </nav>
 
       {% block content %}
+
       {% endblock %}
 
       <!-- FOOTER -->
@@ -223,6 +232,40 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/myScript.js' %}"></script>
   
+<script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+//GENERATE CSRF TOKEN
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+function csrfSafeMethod(method) {
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+</script>
+
+{% block script %}
+{% endblock %}
 
 
   </body>

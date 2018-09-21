@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .models import GalleryGroup, Artwork
+from .models import GalleryGroup, Artwork, Subscribe
 
 
+from blog.utils import SendSubscribeMail
+from django.http import HttpResponse, JsonResponse
 def galleries(request):
     gallery_groups = GalleryGroup.objects.all().order_by('title')
     return render(request, 'gallery/galleries.html', {'galleryGroups': gallery_groups})
@@ -44,3 +46,16 @@ def art_detail(request, art_id):
 def about_me(request):
     return render(request, 'gallery/about_me.html')
 
+
+
+def subscribe(request):
+    if request.method == 'POST':
+        email = request.POST['email_id']
+        email_qs = Subscribe.objects.filter(email_id = email)
+        if email_qs.exists():
+            data = {"status" : "404"}
+            return JsonResponse(data)
+        else:
+            Subscribe.objects.create(email_id = email)
+            SendSubscribeMail(email) # Send the Mail, Class available in utils.py
+    return HttpResponse("/")

@@ -39,6 +39,8 @@ INSTALLED_APPS = (
     'blog',
     'tinymce',
     'account',
+    'mptt',
+    'widget_tweaks',
 )
 
 
@@ -47,6 +49,10 @@ cloudinary.config(
     api_key = "367622187743427",
     api_secret = "m7-oA8baCn7jpHiu7CbBEgxDmoo"
 )
+
+MAILCHIMP_API_KEY = "605ad21041e5599455b36bbe7c3530cc-us19"
+MAILCHIMP_SUBSCRIBE_LIST_ID = "15f45e1377"
+
 
 
 MIDDLEWARE = [
@@ -65,7 +71,7 @@ ROOT_URLCONF = 'portfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -199,6 +205,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'statusbar':
     True,
 }
+
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

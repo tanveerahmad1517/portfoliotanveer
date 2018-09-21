@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 import json
 from django_ajax.decorators import ajax
 # Create your views here.
-from .models import Post
+from .models import Post, Category
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from braces.views import LoginRequiredMixin
@@ -14,7 +14,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from . import forms
-# Create your views here.
+
 class AllPostList(ListView):
     model = Post
     context_object_name = 'post'
@@ -65,3 +65,59 @@ def profile(request, username):
     }
 
     return render(request, 'blog/profile.html', data)
+
+
+
+
+def show_category(request,hierarchy= None):
+    category_slug = hierarchy.split('/')
+    parent = None
+    root = Category.objects.all()
+
+    for slug in category_slug[:-1]:
+        parent = root.get(parent=parent, slug = slug)
+
+    try:
+        post = Category.objects.get(parent=parent,slug=category_slug[-1])
+    except:
+        course = get_object_or_404(Post, slug = category_slug[-1])
+        return render(request, "blog/course_detail.html", {'post':post})
+    else:
+        return render(request, 'blog/categories.html', {'post':post})
+ 
+
+def show_categorylist(request,hierarchy= None):
+    category_slug = hierarchy.split('/')
+    parent = None
+    root = Category.objects.all()
+
+    for slug in category_slug[:-1]:
+        parent = root.get(parent=parent, slug = slug)
+
+    try:
+        post = Category.objects.get(parent=parent,slug=category_slug[-1])
+    except:
+        post = get_object_or_404(Post, slug = category_slug[-1])
+        return render(request, "blog/_post.html", {'post':post})
+    else:
+        return render(request, 'blog/categories.html', {'post':post})
+ 
+
+
+
+
+class AllCatList(ListView):
+    model = Category
+    context_object_name = 'allcat'
+    template_name = 'blog/allcat.html'
+   
+
+class DetailCatList(DeleteView):
+    model = Category
+    context_object_name = 'detailcat'
+    template_name = 'blog/detailcat.html'
+
+
+
+
+

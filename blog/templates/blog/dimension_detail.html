@@ -1,0 +1,39 @@
+{% extends "gallery/base.html" %}
+{% block head %}
+{% endblock %}
+{%block content%}
+
+<div class="container-fluid">
+
+   <div class="card">
+      <div class="card-body">
+         <h2>My dimensions</h2>
+         {% load mptt_tags %}
+
+     {% recursetree dimensions %}
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{node.level}}" aria-expanded="false" aria-controls="collapsed">
+
+             {{ node.name }}</a>
+             {% if not node.is_leaf_node %}
+
+                 <ul class="children">
+                   <div id="collapse{{node.level}}" class="children panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                     <div class="panel-body">
+
+                     {{ children }}  </div>
+                     </div>
+                 </ul>
+             {% endif %}
+
+     {% endrecursetree %}
+
+      </div>
+   </div>
+   <br>
+   
+   <button onclick="goBack()" class = "btn btn-secondary">Go Back</button><br><br><a class="btn btn-primary" href="" role="button">Add a user to plan</a>
+</div>
+
+
+
+{%endblock%}

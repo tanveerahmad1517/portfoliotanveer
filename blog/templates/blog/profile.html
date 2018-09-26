@@ -54,9 +54,9 @@
     {% for post in posts %}
   <div class="col-sm-8 col-md-8 post_col">
                 <div class="card-content">
-                 <a href="{% url 'posts:detail' post.pk  %}">  <h3 class="header">{{ post.title|slice:"70" }} </h3> </a>
-                  <div class="post_image"> <a href="{% url 'posts:detail' post.pk  %}"><img src="{{ post.image.url }}"> </a> </div>
-                  <p> {{ post.description | safe |slice:"430"  }} <a href="{% url 'posts:detail' post.pk  %}">Read More </a></p> 
+                 <a href="{{ post.get_absolute_url }}">  <h3 class="header">{{ post.title|slice:"70" }} </h3> </a>
+                  <div class="post_image"> <a href=""><img src="{{ post.image.url }}"> </a> </div>
+                  <p> {{ post.description | safe |slice:"430"  }} <a href="{{ post.get_absolute_url  }}">Read More </a></p> 
 
                 </div>
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">

@@ -1,63 +1,69 @@
-from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
+from django.conf import settings
+from django.contrib.auth.models import User
+from parler.models import TranslatableModel, TranslatedFields
+
+
 from django.db.models.signals import post_save
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
-from django.urls import reverse
-from tinymce import HTMLField
-from django.conf import  settings
-from cloudinary.models import CloudinaryField
-from mptt.models import MPTTModel, TreeForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
 
-class Category(MPTTModel):
-  name = models.CharField(max_length=50, unique=True)
-  parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', db_index=True)
-  slug = models.SlugField()
-
-  class MPTTMeta:
-    order_insertion_by = ['name']
-
-  class Meta:
-    unique_together = (('parent', 'slug',))
-    verbose_name_plural = 'categories'
-
-  def get_slug_list(self):
-    try:
-      ancestors = self.get_ancestors(include_self=True)
-    except:
-      ancestors = []
-    else:
-      ancestors = [ i.slug for i in ancestors]
-    slugs = []
-    for i in range(len(ancestors)):
-      slugs.append('/'.join(ancestors[:i+1]))
-    return slugs
-
-  def __str__(self):
-    return self.name
 
 
 
 
+class Category(TranslatableModel):
+    translations = TranslatedFields(
+            name = models.CharField(max_length=200,
+                                    db_index=True),
+            slug = models.SlugField(max_length=200,
+                                    db_index=True,
+                                    unique=True)
+        )
 
+    class Meta:
+        # ordering = ('name',)
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
 
-class Post(models.Model):
-    user =   models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
-    date = models.DateTimeField(auto_now_add=True)
-    title = models.TextField(max_length=255)
-    description = HTMLField('Description')
-    category = TreeForeignKey('Category', on_delete=models.CASCADE, null=True,blank=True)
-    default = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='default_category', null=True, blank=True)
-    image = CloudinaryField("Post_images")
-
+    def __str__(self):
+        return self.name
 
     def get_absolute_url(self):
-        return reverse('posts:all')
+            return reverse('posts:product_list_by_category',
+                           args=[self.slug])
+    # def get_absolute_url(self):
+    #         return reverse('posts:profile', args=[self.pk])
+                           
 
+class Post(TranslatableModel):
+    translations = TranslatedFields(
+            title = models.CharField(max_length=200, db_index=True),
+            slug = models.SlugField(max_length=200, db_index=True),
+            description = models.TextField(blank=True)
+        )
+    user =   models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(Category,
+                                 related_name='productss',
+                                 null=True, blank=True,
+                                 on_delete=models.SET_NULL)
+    image = models.ImageField(upload_to='products/%Y/%m/%d',
+                              blank=True)
 
+    available = models.BooleanField(default=True)
+    date = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    #class Meta:
+    #    ordering = ('name',)
+    #    index_together = (('id', 'slug'),)
+
+    def get_absolute_url(self):
+            return reverse('posts:detail',
+                           args=[self.id, self.slug])
 
     class Meta:
         verbose_name = _('Post')
@@ -66,3 +72,5 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    

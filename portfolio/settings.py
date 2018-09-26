@@ -33,14 +33,23 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+# Apps
     'gallery',
+    'blog',
+    # 'menu',
+    'account',
+
+#Modules
+    'tinymce',
     'storages',
     'cloudinary',
-    'blog',
-    'tinymce',
-    'account',
     'mptt',
     'widget_tweaks',
+    'django_filters',
+    'rosetta',
+    'parler',
+    'localflavor',
 )
 
 
@@ -58,6 +67,7 @@ MAILCHIMP_SUBSCRIBE_LIST_ID = "15f45e1377"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -79,6 +89,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
@@ -86,9 +97,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/London'
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+)
+
+LANGUAGE_CODE = 'en'
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'),
+)
+
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -125,7 +148,7 @@ MEDIA_ROOT = (os.path.join(BASE_DIR, "media"))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'porfolio',
+        'NAME': 'portfolio_dbdemo',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',
@@ -214,3 +237,16 @@ EMAIL_HOST_PASSWORD = 'tanveer1236'
 EMAIL_HOST_USER = 'tanveerobjects@gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+# django-parler
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en'},
+        {'code': 'es'},
+    ),
+    'default': {
+        'fallback': 'en',
+        'hide_untranslated': False,
+    }
+}

@@ -11,23 +11,23 @@ class TinyMCEWidget(TinyMCE):
 
 
 
-class TweetModelForm(forms.ModelForm):
-    description = forms.CharField(
-        widget=TinyMCEWidget(
-            attrs={'required': False, 'cols': 30, 'rows': 10}
-        )
-    )
-    class Meta:
-        model = Post
-        fields = [
-            #"user",
-            'title', 'description', 'image'
+# class TweetModelForm(forms.ModelForm):
+#     description = forms.CharField(
+#         widget=TinyMCEWidget(
+#             attrs={'required': False, 'cols': 30, 'rows': 10}
+#         )
+#     )
+#     class Meta:
+#         model = Post
+#         fields = [
+#             #"user",
+#             'name', 'description', 'image'
 
-        ]
-        #exclude = ['user']
+#         ]
+#         #exclude = ['user']
 
-    def clean_content(self, *args, **kwargs):
-        content = self.cleaned_data.get("content")
-        if content == "abc":
-            raise forms.ValidationError("Cannot be ABC")
-        return content
+#     def clean_content(self, *args, **kwargs):
+#         content = self.cleaned_data.get("content")
+#         if content == "abc":
+#             raise forms.ValidationError("Cannot be ABC")
+#         return content

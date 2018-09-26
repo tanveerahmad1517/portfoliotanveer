@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 import json
 from django_ajax.decorators import ajax
 # Create your views here.
-from posts.models import Post
+from blog.models import Post
 from account.models import  Profile
 from django.views.generic import ListView, DetailView
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.views.generic.edit import CreateView, UpdateView, View
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from account.forms import UserEditForm, ProfileEditForm
+# from account.forms import UserEditForm, ProfileEditForm
 from django.contrib import messages
 
 

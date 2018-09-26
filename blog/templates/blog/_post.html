@@ -1,17 +1,23 @@
+{% extends 'base.html' %}
+
 {% load humanize %}
+
 {% load static from staticfiles %}
 {% load namify %}
 {% load urlify %}
+{% block content %}
 <div class="container">
   <div class="row">
 
+  <div id="main" class="product-list">
+    <h1>{% if category %}{{ category.name }}{% else %} {% endif %}</h1>
     
     {% for post in post %}
   <div class="col-sm-8 col-md-8 post_col">
                 <div class="card-content">
-                 <a href="{% url 'posts:detail' post.pk  %}">  <h3 class="header">{{ post.title|slice:"70" }} </h3> </a>
-                  <div class="post_image"> <a href="{% url 'posts:detail' post.pk  %}"><img src="{{ post.image.url }}"> </a> </div>
-                  <p> {{ post.description | safe |slice:"430"  }} <a href="{% url 'posts:detail' post.pk  %}">Read More </a></p> 
+                 <a href="{{ post.get_absolute_url  }}">  <h3 class="header">{{ post.title|slice:"70" }} </h3> </a>
+                  <div class="post_image"> <a href=""><img src="{{ post.image.url }}"> </a> </div>
+                  <p> {{ post.description | safe |slice:"430"  }} <a href="{{ post.get_absolute_url  }}">Read More </a></p> 
 
                 </div>
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
@@ -20,12 +26,27 @@
                     <div class="title"><span>{{ post.user.profile.get_screen_name }} 
                         </a></span>
                   </div></a>
-                  <div class="date"> <i class="far fa-clock"> </i> <time> {{ post.date|naturaltime }}  </time> </div>
+                  <div class="date"> <i class="far fa-clock"> </i> <time> {{ post.date|naturaltime }}  </time> 
+                  </div>
                   
                 </footer>
-                <div class="card-action">
-  </div>       
-
+                </div>
+                <div class="col-sm-4 col-md-4 post_col">
+    <div id="sidebar">
+    <h3>Categories</h3>
+    <ul>
+      <li {% if not category %}class="selected"{% endif %}>
+        <a href="{% url 'posts:all' %}">All</a>
+      </li>
+      {% for c in categories %}
+        <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+               </div>
+  
 {% if forloop.counter|divisibleby:2 and not forloop.last %}
         </div><br><div class="row">
 
@@ -61,3 +82,4 @@
 
 </div>
 </div>
+{% endblock content %}

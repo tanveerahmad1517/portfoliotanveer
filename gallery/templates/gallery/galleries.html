@@ -1,6 +1,102 @@
-{% extends 'gallery/base.html' %}
+{% extends 'base.html' %}
 {% load staticfiles %} 
+{% load humanize %}
 {% block content %} 
+
+
+<!--Light Slider -->
+{% block script %}
+  <script type="text/javascript" src="{% static 'unifilter/js/jquery-3.3.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'unifilter/js/masonry.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'unifilter/js/imagesloaded.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'unifilter/js/jquery.unifilter.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'unifilter/js/scripts.js' %}"></script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+      
+        // our online shop UL list
+        var shop = $('#shop');
+        
+        // Masonry Options
+      var masonry_options = {
+          itemSelector: 'li:not(.uf-clone)',
+          percentPosition: true,
+          gutter: 10
+        };
+        
+        // UniFilter Options
+        var unifilter_options = {
+          order: "filters, search, sort",
+          animationType: 'translate',
+          filters: {
+            "style" : {
+              tooltip: true,
+              multiple: false
+            }
+          },
+          search: {
+            "search": {
+              placeholder: 'Type name or color',
+              getSearchData: function(){
+                var name = $(this).find('.name')[0].firstChild.textContent;
+                var color = $(this).data('search');
+                return new String(color + ', ' + name).split(/\s*,\s*/);
+              }
+            }
+          },
+          sort: {
+            options: {
+              'price': {
+                label: 'Price',
+                getSortData: function(){
+                  var price = $(this).find('.price > span').text().replace(/[^0-9\.]/g, '');
+                return parseFloat(price);
+                }
+              },
+              'polarized': {
+                label: 'Polatized'
+              },
+              'new': {
+                label: 'New Arrivals'
+              },
+              'bestseller': {
+                label: 'Best Sellers'
+              }
+            }
+          }
+        };
+        
+        // init UniFilter plugin
+        $('#filters').unifilter(shop, unifilter_options).on('onListUpdate', function(){
+          shop.masonry('destroy').masonry(masonry_options);
+        });
+        
+        // init masonry and hide all list items
+        shop.masonry(masonry_options).children('.uf-item').css('opacity', 0);
+      
+      // show images as they keep loading
+        shop.imagesLoaded().progress(function(instance, image){
+          shop.masonry('layout');
+          $(image.img).parents('.uf-item').css('opacity', '');
+        });
+            
+      });
+    
+  </script>
+<!-- Portfolio Filter Tabs  End -->
+
+    <div class="container">
+        <div class="row">
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('#lightgallery').lightGallery();
+        });
+        </script>
+        <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+        <script src="{% static 'js/lightgallery/lightgallery-all.min.js' %}"></script>
+        <script src="{% static 'js/lightgallery/jquery.mousewheel.min.js' %}"></script>
+<!-- Light Gallery End-->
+{% endblock %}
 
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
  
@@ -144,44 +240,69 @@
 
     <div class="container">
       <div class="row">
+        <div id="categories">
 
-        {% for galleryGroup in galleryGroups %}
-      <div class="col-sm-6 col-md-6 col-lg-4">
-           
-        
+    <h3>Categories</h3>
+    <ul>
+      <li {% if not category %}class="selected"{% endif %}>
+        <a href="{% url 'gallery:all' %}">All</a>
+      </li>
+      {% for gcategory in gcategories %}
+        <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+          <a href="{{ gcategory.get_absolute_url }}">{{ gcategory.name }}</a>
+        </li>
+     {% endfor %}
+    </ul>
+  </div>
+  <div id="main" class="product-list">
+    <h1>{% if gcategory %}{{ gcategory.name }}{% else %} {% endif %}</h1>
+    
+   {% if artwork %}
+       
+<div class="demo-gallery">
+    {% for artwork in artwork %}
+                <div class="col-sm-4 col-md-4">
+            <ul id="lightgallery" class="list-unstyled row">
 
-        <div class="grid">
+                <li data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="{{ artwork.art.url }}" data-sub-html="<h2> {{ artwork.title }} </h2> <h2> <p>{{ artwork.description|linebreaks }} <h4><a href='{% url "gallery:art" art_id=artwork.id %}' target='_blank'>Go Detail</a>  <span> Or <a href='{{ artwork.link }}'>Visit Website</a></span></h4></p>">
+
+                    
+                         <div class="grid">
           <figure class="effect-jazz">
-            
-            <img src="{{ galleryGroup.galleryimage.url }}" alt="img25"/>
-            <figcaption>
-              <h2> {{ galleryGroup.title }} </h2>
-              <a href="#"><i class="fa fa-fw fa-share"></i></a>
-               <p>{{ galleryGroup.description|linebreaks }} </p>
-              <a 
-                href='{% url 'gallery_detail' gallery_title_slug=galleryGroup.slug %}'> View {{ galleryGroup.title }} 
-              </a>
-            </figcaption>     
-          </figure>
-          
+
+                        <img class="img-responsive" src="{{ artwork.art.url }}">
+                        <figcaption>
+              <h2> {{ artwork.title }} </h2>
+
+             
+          </figcaption></figure>
+</div></div>
+                   
+                </li>
+                
+
+       
+                 {% endfor %}
         
-        {% if forloop.counter|divisibleby:2 and not forloop.last %}
+            </ul>
+          </div></div></div>
+          {% if forloop.counter|divisibleby:2 and not forloop.last %}
         </div><br><div class="row">
 
       {% endif %}
-      </div><!-- /.row -->
-    </div>
-
-
-{% endfor %}
-
-
-
-
-</div>
     
+</div>
+{% else %}  
+
+          
+{% endif %}
+
+
+
+
+
+
 
 
 
 {% endblock content %}
-  

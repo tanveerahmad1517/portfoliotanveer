@@ -15,14 +15,70 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from . import forms
 
-class AllPostList(ListView):
-    model = Post
-    context_object_name = 'post'
-    paginate_by = 4
+# class AllPostList(ListView):
+#     model = Post
+#     context_object_name = 'post'
+#     paginate_by = 4
 
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'blog/detail.html'
+
+def profile(request, username):
+    page_user = get_object_or_404(User, username=username)
+    posts = Post.objects.filter(user=page_user)
+    data = {
+        'page_user': page_user,
+
+        'posts': posts,
+    }
+
+    return render(request, 'blog/profile.html', data)
+
+
+
+def post_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    post = Post.objects.filter(available=True)
+    if category_slug:
+        language = request.LANGUAGE_CODE
+        category = get_object_or_404(Category,
+                                     translations__language_code=language,
+                                     translations__slug=category_slug)
+        post = post.filter(category=category)
+    return render(request,
+                  'blog/_post.html',
+                  {'category': category,
+                   'categories': categories,
+                   'post': post})
+
+
+
+# class PostDetailView(DetailView):
+#     model = Post
+#     template_name = 'blog/detail.html'
+
+def detail(request, id, slug):
+    language = request.LANGUAGE_CODE
+    post = get_object_or_404(Post,
+                                id=id,
+                                translations__language_code=language,
+                                translations__slug=slug,
+                                available=True)
+    # cart_product_form = CartAddProductForm()
+
+    # r = Recommender()
+    # recommended_products = r.suggest_products_for([product], 4)
+
+    return render(request,
+                  'blog/detail.html',
+                  {'post': post,
+                  # 'cart_product_form': cart_product_form,
+                  # 'recommended_products': recommended_products 
+                })
+
+
+
+
+
 
 class PostEditView(UpdateView):
     model = Post
@@ -34,88 +90,11 @@ class PostDeletePost(DeleteView):
     success_url = reverse_lazy("posts:all")
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
-    form_class = forms.TweetModelForm
-    model = Post
-    # fields = '__all__'
-    template_name = 'posts/post_create.html'
-
-posts_NUM_PAGES = 10
-
-def profile(request, username):
-    page_user = get_object_or_404(User, username=username)
-    all_posts = Post.objects.filter(user=page_user)
-    paginator = Paginator(all_posts, posts_NUM_PAGES)
-    posts = paginator.page(1)
-    from_Post = -1
-    if posts:  # pragma: no cover
-        from_Post = posts[0].id
-
-    Posts_count = Post.objects.filter(user=page_user).count()
-    data = {
-        'page_user': page_user,
-
-        'bar_data': [
-            Posts_count],
-        'bar_labels': json.dumps('["Posts"]'),  # noqa: E501
-
-        'posts': posts,
-        'from_Post': from_Post,
-        'page': 1
-    }
-
-    return render(request, 'blog/profile.html', data)
-
-
-
-
-def show_category(request,hierarchy= None):
-    category_slug = hierarchy.split('/')
-    parent = None
-    root = Category.objects.all()
-
-    for slug in category_slug[:-1]:
-        parent = root.get(parent=parent, slug = slug)
-
-    try:
-        post = Category.objects.get(parent=parent,slug=category_slug[-1])
-    except:
-        course = get_object_or_404(Post, slug = category_slug[-1])
-        return render(request, "blog/course_detail.html", {'post':post})
-    else:
-        return render(request, 'blog/categories.html', {'post':post})
- 
-
-def show_categorylist(request,hierarchy= None):
-    category_slug = hierarchy.split('/')
-    parent = None
-    root = Category.objects.all()
-
-    for slug in category_slug[:-1]:
-        parent = root.get(parent=parent, slug = slug)
-
-    try:
-        post = Category.objects.get(parent=parent,slug=category_slug[-1])
-    except:
-        post = get_object_or_404(Post, slug = category_slug[-1])
-        return render(request, "blog/_post.html", {'post':post})
-    else:
-        return render(request, 'blog/categories.html', {'post':post})
- 
-
-
-
-
-class AllCatList(ListView):
-    model = Category
-    context_object_name = 'allcat'
-    template_name = 'blog/allcat.html'
-   
-
-class DetailCatList(DeleteView):
-    model = Category
-    context_object_name = 'detailcat'
-    template_name = 'blog/detailcat.html'
+# class PostCreateView(LoginRequiredMixin, CreateView):
+#     form_class = forms.TweetModelForm
+#     model = Post
+#     # fields = '__all__'
+#     template_name = 'posts/post_create.html'
 
 
 

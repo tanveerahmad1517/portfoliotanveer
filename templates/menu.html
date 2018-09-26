@@ -1,0 +1,25 @@
+{% load menu %}
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+   
+    {% block content %}
+      <ul class="nav navbar-nav dropdownmenu">
+              <li class="dropdown"><a href="index.html" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-picture"></span> Gallery<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                   <!--  -->
+                    {% for gcategory in gcategories %}
+        <li {% if gcategory.slug == gcategory.slug %}class="selected"{% endif %}>
+          <a href="{{ gcategory.get_absolute_url }}">{{ gcategory.name }}</a>
+        </li>
+      {% endfor %}
+                  
+
+
+            </ul>
+                
+              </li>
+    {% endblock %}
+</body>
+</html>

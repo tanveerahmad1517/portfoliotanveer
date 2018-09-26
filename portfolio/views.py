@@ -30,7 +30,7 @@ def contact(request):
                 "New contact form submission",
                 content,
                 "Your website" +'',
-                ['tanveerobjects@gmail.com'],
+                ['adeelali.objects@gmail.com'],
                 headers = {'Reply-To': contact_email }
             )
             email.send()

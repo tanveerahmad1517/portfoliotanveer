@@ -11,8 +11,15 @@ body.home p, h1, h2, h3, h4, h5, span {
 p {
         font-size: 16px !important;
 }
+.demo-gallery > ul > li img {
+    width: 480px;
+}
 
 
+div#main {
+    width: 81%;
+    margin: 0 auto;
+}
 
 div#categories ul li {
     display: inline-block;

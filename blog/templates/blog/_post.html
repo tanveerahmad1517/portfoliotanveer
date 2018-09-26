@@ -9,13 +9,12 @@
 <div class="container">
   <div class="row">
 
-  <div id="main" class="product-list">
-    <h1>{% if category %}{{ category.name }}{% else %} {% endif %}</h1>
     
-    {% for post in post %}
+    
   <div class="col-sm-8 col-md-8 post_col">
+    {% for post in post %}
                 <div class="card-content">
-                 <a href="{{ post.get_absolute_url  }}">  <h3 class="header">{{ post.title|slice:"70" }} </h3> </a>
+                 <a href="{{ post.get_absolute_url  }}">  <h3>{{ post.title|slice:"70" }} </h3> </a>
                   <div class="post_image"> <a href=""><img src="{{ post.image.url }}"> </a> </div>
                   <p> {{ post.description | safe |slice:"430"  }} <a href="{{ post.get_absolute_url  }}">Read More </a></p> 
 
@@ -28,10 +27,16 @@
                   </div></a>
                   <div class="date"> <i class="far fa-clock"> </i> <time> {{ post.date|naturaltime }}  </time> 
                   </div>
+
                   
                 </footer>
-                </div>
-                <div class="col-sm-4 col-md-4 post_col">
+                
+
+
+
+  {% endfor %}
+</div>
+<div class="col-sm-4 col-md-4 post_col">
     <div id="sidebar">
     <h3>Categories</h3>
     <ul>
@@ -45,14 +50,8 @@
       {% endfor %}
     </ul>
   </div>
-               </div>
-  
-{% if forloop.counter|divisibleby:2 and not forloop.last %}
-        </div><br><div class="row">
+               </div>  
 
-      {% endif %}
-    </div>
-  {% endfor %}
 </div></div>
 <ul class="pagination">
 {% if is_paginated %}
@@ -79,7 +78,7 @@
   </ul>
 {% endif %}
 
-
+ 
 </div>
 </div>
 {% endblock content %}

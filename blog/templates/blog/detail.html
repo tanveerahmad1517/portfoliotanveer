@@ -7,15 +7,15 @@
 
 <div class="container">
  <div class="row">
- 	<div class="col-sm-8 col-md-8">
+ 	<div class="col-sm-8 col-md-8 customclass">
   <ul class="breadcrumb">
           <li> <a href="{% url 'posts:all' %}" class="breadcrumb"> Blog </a> </li>
             {% for i in post.category.get_slug_list %}
           <li> <a class="breadcrumb" href="/category/{{ i }}">
             {{ i | get_name }} </a> </li>
             {% endfor %}
-          <li> <span> </li>
-            {{ post.title | safe |slice:"70"  }} </span> 
+          <li> <span>
+            {{ post.title | safe |slice:"70"  }} </span> </li>
   </ul>
     
   

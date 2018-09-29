@@ -2,7 +2,6 @@
 
 body {
     font-family: "Open Sans",sans-serif !important;
-    margin-top: 5px;
 }
 
 body.home p, h1, h2, h3, h4, h5, span {
@@ -10,6 +9,19 @@ body.home p, h1, h2, h3, h4, h5, span {
 }
 p {
         font-size: 16px !important;
+}
+
+.breadcrumb {
+    padding: 0px 0px 0px 0px;
+}
+ul.breadcrumb li {
+    padding: 15px 0px 0px 9px;
+}
+.customclass p {
+    margin: 0px;
+}
+.customclass {
+    padding: 0px;
 }
 .customnav {
     background-color: #Efe2b9 !important;
@@ -22,6 +34,9 @@ p {
 }
 .customnav li {
     font-size: 20px;
+}
+.dropdown-toggle::after {
+    margin-left: 0px;
 }
 .customnav a {
     font-size: 20px;
@@ -302,7 +317,7 @@ footer.post_header_profile {
 
 
 
-@media only screen and (max-width: 600px) { 
+@media only screen and (max-width: 668px) { 
 
 footer.post_header_profile {
 float: none;
@@ -310,6 +325,13 @@ float: none;
 
         margin: 0;
     padding: 0;
+}
+
+.h2, h2 {
+    font-size: 15px;
+}
+p {
+    font-size: 13px !important;
 }
 .demo-gallery > ul > li {
     margin-bottom: -15px;
@@ -320,7 +342,7 @@ float: none;
     margin-left: -8px;
 }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 700px) {
 .demo-gallery > ul > li {
     margin-bottom: -15px;
     width: 49%;

@@ -63,9 +63,6 @@ def art_detail(request, art_id):
     return render(request, 'gallery/art_detail.html', {'artwork': artwork, 'next': next_artwork, 'previous': previous})
 
 
-def about_me(request):
-    return render(request, 'gallery/about_me.html')
-
 
 
 def subscribe(request):

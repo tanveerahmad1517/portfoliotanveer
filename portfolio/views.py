@@ -46,3 +46,5 @@ def successView(request):
     return render(request, 'success.html')
 
 
+def about_me(request):
+    return render(request, 'about_me.html')

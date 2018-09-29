@@ -3,24 +3,42 @@
 body {
     font-family: "Open Sans",sans-serif !important;
     margin-top: 5px;
-    padding-top: 60px; 
 }
+
 body.home p, h1, h2, h3, h4, h5, span {
     font-family: sans-serif;
 }
 p {
         font-size: 16px !important;
 }
+.customnav {
+    background-color: #Efe2b9 !important;
+    padding: 16px 0px 16px 0px;
+    margin-bottom: 29px;
+}
+
+.nav-link {
+    padding: 0px;
+}
+.customnav li {
+    font-size: 20px;
+}
+.customnav a {
+    font-size: 20px;
+}
+.navbar-light .navbar-brand {
+    color: #e26a6f;
+    font-size: 61px;
+}
 .demo-gallery > ul > li img {
-    width: 480px;
+    width: 100%;
 }
 
 
-div#main {
-    width: 81%;
-    margin: 0 auto;
+.demo-gallery > ul > li {
+    margin-bottom: -15px;
+    width: 33%;
 }
-
 div#categories ul li {
     display: inline-block;
     padding: 8px 16px 8px 16px;
@@ -47,9 +65,7 @@ button#email_submit {
     padding: 10px;
 }
 
-.container {
-    padding: 0px;
-}
+
 
 .navbar-brand {
     margin-left: 15px;
@@ -81,9 +97,24 @@ footer {
     margin: 0 auto;
 }
 
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Neucha', cursive;
     margin-left: 15px;
+    margin: 2px 0px 5px 0px;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #af7072;
+    border-color: #fff;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #e26a6f;
+    border-color: #e26a6f;
+}
+.btn-primary {
+    width: 100%;
 }
 
 .changeFont {
@@ -118,10 +149,28 @@ p {
     margin-bottom: 40px;
 }
 
-body { 
-    background: url(/static/images/lightpaperfibers.png) repeat 0 0;
+body {
+    background: #f5f2d5 !important;
+    color: #000;
+}
+a {
+    color: #e26a6f;
+}
+a:hover {
+    color: #af7072;
+}
+.navbar-light .navbar-brand {
+    color: #e26a6f;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #e26a6f;
 }
 
+element.style {
+}
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #e26a6f;
+}
 /* remove gradient background form carousel */
 .carousel-control.right, .carousel-control.left {
   background-image:none;
@@ -262,4 +311,29 @@ float: none;
         margin: 0;
     padding: 0;
 }
+.demo-gallery > ul > li {
+    margin-bottom: -15px;
+    width: 100%;
+}
+.row {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+}
+@media only screen and (min-width: 768px) {
+.demo-gallery > ul > li {
+    margin-bottom: -15px;
+    width: 49%;
+    margin-right: 15px;
+}
+.demo-gallery > ul > li:nth-child(2) {
+    margin-right: 0px;
+}
+}
+
+@media only screen and (min-width: 992px) {
+.demo-gallery > ul > li {
+    width: 32%;
+}
+
 }

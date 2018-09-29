@@ -12,9 +12,11 @@ urlpatterns = i18n_patterns(
     path('tinymce/', include('tinymce.urls')),
     path('contact/', views.contact, name='contact'),
     path('success/', views.successView, name='success'),
+    path('aboutMe/', views.about_me, name="aboutMe"),
     path('', include('gallery.urls')),
     path('blog/', include('blog.urls')),
     path('account/', include('account.urls')),
+
     
     # path('menus', include('menu.urls')),
  

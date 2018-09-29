@@ -11,6 +11,36 @@ p {
         font-size: 16px !important;
 }
 
+
+i.fas.fa-angle-up {
+    background-color: #e26a6f;
+    right: 15px;
+    opacity: 1;
+    display: block;
+    position: fixed;
+    bottom: 15px;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    transition: all .2s ease-in-out;
+}
+.fa-angle-up:before {
+    content: "\f106";
+    margin-top: 29px !important;
+    position: relative;
+    top: 9px;
+    font-size: 24px;
+    color: #fff;
+}
+i.fas.fa-angle-up:hover {
+    background: #af7072;
+}
+
 .breadcrumb {
     padding: 0px 0px 0px 0px;
 }
@@ -25,8 +55,11 @@ ul.breadcrumb li {
 }
 .customnav {
     background-color: #Efe2b9 !important;
-    padding: 16px 0px 16px 0px;
-    margin-bottom: 29px;
+    padding: 0px 0px 0px 0px;
+    margin-bottom: 27px;
+}
+.navbar-brand {
+    padding: 0px;
 }
 
 .nav-link {
@@ -43,7 +76,10 @@ ul.breadcrumb li {
 }
 .navbar-light .navbar-brand {
     color: #e26a6f;
-    font-size: 61px;
+    font-size: 40px;
+}
+.fa, .fab, .fal, .far, .fas {
+    margin-right: 5px;
 }
 .demo-gallery > ul > li img {
     width: 100%;
@@ -60,11 +96,22 @@ div#categories ul li {
 }
 div#categories {
     text-align: center;
-    margin-top: 55px;
     margin-bottom: 0px;
     padding: 0px;
 }
+div#categories ul {
+    margin-bottom: 0px;
+}
 
+figure.effect-jazz p {
+    font-size: 19px !important;
+    font-weight: 700;
+}
+figure.effect-jazz span {
+    font-size: 22px;
+    font-weight: 700;
+}           
+   
 
 button.btn.btn-success {
     width: 27%;
@@ -82,9 +129,8 @@ button#email_submit {
 
 
 
-.navbar-brand {
-    margin-left: 15px;
-    margin-top: 5px;
+a.navbar-brand.changeFont {
+    margin: 0px 10px 0px 0px;
 }
 
 .navbar-collapse{

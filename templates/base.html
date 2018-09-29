@@ -5,6 +5,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="{% static 'js/jssor.slider.min.js' %}"></script>
+    <!-- Always get the latest version -->
+<!-- Not recommended for production sites! -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+<!-- Get minor updates and patch fixes within a major version -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@14/dist/smooth-scroll.polyfills.min.js"></script>
+
+<!-- Get patch fixes within a minor version -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@14.0/dist/smooth-scroll.polyfills.min.js"></script>
+
+<!-- Get a specific version -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@14.0.0/dist/smooth-scroll.polyfills.min.js"></script>
    <!--  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
@@ -150,9 +163,7 @@
             .demo-gallery.dark > ul > li a {
               border: 3px solid #04070a;
             }
-            .home .demo-gallery {
-              padding-bottom: 80px;
-            }
+           
         </style>
 
 <!-- End Light Gallery -->
@@ -185,6 +196,7 @@
     
   <body class="home">
  <nav class="navbar navbar-expand-lg navbar-light bg-light customnav">
+  <div class="container">
 {% include 'navbar.html' %}
 </nav>
         <div class="demo-gallery">
@@ -196,14 +208,7 @@
       {% endblock %}
 
       <!-- FOOTER -->
-      <div class="container">
-        <div class="row">
-        
-      <footer>
-        <p>&copy; 2018 Tanveer Ahmed<a class="pull-right" href="#">Back to top</a></p>
-      </footer>
-       </div>
-        </div>
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     
@@ -214,6 +219,46 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="{% static 'js/myScript.js' %}"></script>
   
+
+<!-- Smoothe Scrol -->
+<script>
+
+      // Instantiate Scrolls
+      var scroll = new SmoothScroll('a[href*="#"]:not([data-easing])');
+
+      var linear = new SmoothScroll('[data-easing="linear"]', {easing: 'linear'});
+
+      var easeInQuad = new SmoothScroll('[data-easing="easeInQuad"]', {easing: 'easeInQuad'});
+      var easeInCubic = new SmoothScroll('[data-easing="easeInCubic"]', {easing: 'easeInCubic'});
+      var easeInQuart = new SmoothScroll('[data-easing="easeInQuart"]', {easing: 'easeInQuart'});
+      var easeInQuint = new SmoothScroll('[data-easing="easeInQuint"]', {easing: 'easeInQuint'});
+
+      var easeInOutQuad = new SmoothScroll('[data-easing="easeInOutQuad"]', {easing: 'easeInOutQuad'});
+      var easeInOutCubic = new SmoothScroll('[data-easing="easeInOutCubic"]', {easing: 'easeInOutCubic'});
+      var easeInOutQuart = new SmoothScroll('[data-easing="easeInOutQuart"]', {easing: 'easeInOutQuart'});
+      var easeInOutQuint = new SmoothScroll('[data-easing="easeInOutQuint"]', {easing: 'easeInOutQuint'});
+
+      var easeOutQuad = new SmoothScroll('[data-easing="easeOutQuad"]', {easing: 'easeOutQuad'});
+      var easeOutCubic = new SmoothScroll('[data-easing="easeOutCubic"]', {easing: 'easeOutCubic'});
+      var easeOutQuart = new SmoothScroll('[data-easing="easeOutQuart"]', {easing: 'easeOutQuart'});
+      var easeOutQuint = new SmoothScroll('[data-easing="easeOutQuint"]', {easing: 'easeOutQuint'});
+
+      // Log scroll events
+      var logScrollEvent = function (event) {
+        console.log('type:', event.type);
+        console.log('anchor:', event.detail.anchor);
+        console.log('toggle:', event.detail.toggle);
+      };
+      document.addEventListener('scrollStart', logScrollEvent, false);
+      document.addEventListener('scrollStop', logScrollEvent, false);
+      document.addEventListener('scrollCancel', logScrollEvent, false);
+    </script>
+<!-- End Smooth Scrol -->
+
+ <footer>
+        <p>&copy; 2018 Tanveer Ahmed</p>
+      </footer>
+     <a class="pull-right" href="#"> <i class="fas fa-angle-up"> </i></a>
 
 {% block script %}
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Artwork, Gallery_Category
 from parler.admin import TranslatableAdmin
+from parler.managers import TranslatableQuerySet, TranslatableManager
 @admin.register(Gallery_Category)
 class Gallery_CategoryAdmin(TranslatableAdmin):
     list_display = ['name', 'slug']
@@ -10,10 +11,5 @@ class Gallery_CategoryAdmin(TranslatableAdmin):
 
 
 
-@admin.register(Artwork)
-class PostAdmin(TranslatableAdmin):
-    list_display = ['title',
-                    'available']
-    list_filter = ['available']
-    list_editable = ['available']
+admin.site.register(Artwork)
 

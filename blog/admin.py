@@ -13,7 +13,7 @@ class CategoryAdmin(TranslatableAdmin):
 
 
 @admin.register(Post)
-class PostAdmin(TranslatableAdmin):
+class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug',
                     'available', 'updated']
     list_filter = ['available', 'updated']

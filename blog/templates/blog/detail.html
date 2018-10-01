@@ -8,15 +8,11 @@
 <div class="container">
  <div class="row">
  	<div class="col-sm-8 col-md-8 customclass">
-  <ul class="breadcrumb">
-          <li> <a href="{% url 'posts:all' %}" class="breadcrumb"> Blog </a> </li>
-            {% for i in post.category.get_slug_list %}
-          <li> <a class="breadcrumb" href="/category/{{ i }}">
-            {{ i | get_name }} </a> </li>
-            {% endfor %}
-          <li> <span>
-            {{ post.title | safe |slice:"70"  }} </span> </li>
-  </ul>
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="{% url 'posts:all' %}">Blog</a>
+  <a class="breadcrumb-item" href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>
+  <span class="breadcrumb-item active">{{ post.title | safe |slice:"70" }}</span>
+</nav>
     
   
  		 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
@@ -31,7 +27,7 @@
     <div class="cover_img">
          <img src="{{ post.image.url }}"class="postcover">
     </div>
-  <div class="col s12 col m12"> 
+  <div class="col s3 col m12"> 
 
         <h4> {{ post.title }} </h4>
             <p> {{ post.description| safe}} </p>
@@ -39,6 +35,39 @@
  </div>
              </div>        
 </div>
-</div>
+
+<h1> Related Posts </h1>
+<div class="row">
+{% for r_post in related %}
+<div class="col-sm-4 col-md-4"> 
+ <div class="grid">
+          <figure class="effect-jazz">
+
+                        <img class="img-responsive" src="{{ r_post.image.url }}">
+                        <figcaption>
+<a href="{{ r_post.get_absolute_url  }}">  <h3>{{ r_post.title|slice:"70" }} </h3> </a>
+               <p> {{ r_post.title }} </p>
+              <p> <span> {{ r_post.category }} </span> </p>
+
+             
+          </figcaption></figure>
+
+
+
+                </div>
+               
+                     </div>
+          
+ {% if forloop.counter|divisibleby:"2" or forloop.last %}
+        </div> <!--end row-->
+    {% endif %}
+{% endfor %}
+       
+                 
+        </div>
+          
+     </div>
+          
+
 
 {% endblock %}

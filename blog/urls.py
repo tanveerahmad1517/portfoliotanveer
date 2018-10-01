@@ -10,14 +10,14 @@ urlpatterns = [
     # url(r'^user/(\w+)/$', views.profile, name='profile'),
     path('user/<username>/', views.profile, 
          name='profile'),
-    path('list', views.post_list, name="all"),
-    path('<slug:category_slug>/', views.post_list, 
-         name='categorylist'),
+    path('list', views.post_list.as_view(), name="all"),
+    # path('<slug:category_slug>/', views.post_list.as_view(), 
+    #      name='categorylist'),
 
-    path('<slug:category_slug>/', views.post_list, 
+    path('<slug:category_slug>/', views.post_list.as_view(), 
          name='product_list_by_category'),
 
-    path('<int:id>/<slug:slug>/', views.detail,
+    path('<int:id>/<slug:slug>/', views.detail.as_view(),
          name='detail'),  
 
     

@@ -10,6 +10,14 @@ import cloudinary
 # Create your models here.
 from cloudinary.models import CloudinaryField
 from parler.models import TranslatableModel, TranslatedFields
+
+
+class ArtManager(models.Manager):
+    def get_related(self, instance):
+        art_one = self.get_queryset().filter(gcategory=instance.gcategory)
+        qs = (art_one).exclude(id=instance.id).distinct()
+        return qs
+
 # class GalleryGroup(models.Model):
 
 #     title = models.CharField(max_length=100, default='')
@@ -52,21 +60,18 @@ class Gallery_Category(TranslatableModel):
                            args=[self.slug])
 
 
-
-class Artwork(TranslatableModel):
-    translations = TranslatedFields(
-            title = models.CharField(max_length=200, db_index=True),
-            # slug = models.SlugField(max_length=200, db_index=True),
-            description = models.TextField(blank=True)
-        )
+class Artwork(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
     link = models.URLField(max_length=200)
-    available = models.BooleanField(default=True)
     published_date = models.DateTimeField(default=timezone.now)
     art = CloudinaryField("art")
     gcategory = models.ForeignKey(Gallery_Category,
-                                 related_name='productss',
+                                 related_name='gcategory',
                                  null=True, blank=True,
                                  on_delete=models.SET_NULL)
+    available = models.BooleanField(default=True)
+    objects = ArtManager()
 
     def publish(self):
         self.save()
@@ -76,6 +81,12 @@ class Artwork(TranslatableModel):
 
     # def get_absolute_url(self):
     #     return reverse('gallery.views.art_detail', args=[str(self.id)])
+
+
+
+
+
+
 
 
 

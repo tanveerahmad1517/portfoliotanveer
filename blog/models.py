@@ -11,7 +11,11 @@ from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
-
+class PostManager(models.Manager):
+    def get_related(self, instance):
+        post_one = self.get_queryset().filter(category=instance.category)
+        qs = (post_one).exclude(id=instance.id).distinct()
+        return qs
 
 
 
@@ -33,21 +37,18 @@ class Category(TranslatableModel):
         return self.name
 
     def get_absolute_url(self):
-            return reverse('posts:product_list_by_category',
-                           args=[self.slug])
+            return reverse('posts:product_list_by_category', args=[self.slug])
     # def get_absolute_url(self):
     #         return reverse('posts:profile', args=[self.pk])
                            
 
-class Post(TranslatableModel):
-    translations = TranslatedFields(
-            title = models.CharField(max_length=200, db_index=True),
-            slug = models.SlugField(max_length=200, db_index=True),
-            description = models.TextField(blank=True)
-        )
+class Post(models.Model):
+    title = models.CharField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True)
+    description = models.TextField(blank=True)
     user =   models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     category = models.ForeignKey(Category,
-                                 related_name='productss',
+                                 related_name='category',
                                  null=True, blank=True,
                                  on_delete=models.SET_NULL)
     image = models.ImageField(upload_to='products/%Y/%m/%d',
@@ -56,6 +57,7 @@ class Post(TranslatableModel):
     available = models.BooleanField(default=True)
     date = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    objects = PostManager()
 
     #class Meta:
     #    ordering = ('name',)

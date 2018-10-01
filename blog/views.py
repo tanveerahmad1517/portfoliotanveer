@@ -34,21 +34,38 @@ def profile(request, username):
 
 
 
-def post_list(request, category_slug=None):
+class post_list(ListView):
+  def get(self, request, category_slug=None):
     category = None
     categories = Category.objects.all()
     post = Post.objects.filter(available=True)
     if category_slug:
-        language = request.LANGUAGE_CODE
-        category = get_object_or_404(Category,
+      language = request.LANGUAGE_CODE
+      category = get_object_or_404(Category,
                                      translations__language_code=language,
                                      translations__slug=category_slug)
-        post = post.filter(category=category)
+      post = post.filter(category=category)
     return render(request,
                   'blog/_post.html',
                   {'category': category,
                    'categories': categories,
                    'post': post})
+
+# def post_list(request, category_slug=None):
+#     category = None
+#     categories = Category.objects.all()
+#     post = Post.objects.filter(available=True)
+#     if category_slug:
+#         language = request.LANGUAGE_CODE
+#         category = get_object_or_404(Category,
+#                                      translations__language_code=language,
+#                                      translations__slug=category_slug)
+#         post = post.filter(category=category)
+#     return render(request,
+#                   'blog/_post.html',
+#                   {'category': category,
+#                    'categories': categories,
+#                    'post': post})
 
 
 
@@ -56,28 +73,63 @@ def post_list(request, category_slug=None):
 #     model = Post
 #     template_name = 'blog/detail.html'
 
-def detail(request, id, slug):
-    language = request.LANGUAGE_CODE
-    post = get_object_or_404(Post,
-                                id=id,
-                                translations__language_code=language,
-                                translations__slug=slug,
-                                available=True)
+# def detail(request, id, slug):
+#     language = request.LANGUAGE_CODE
+#     post = get_object_or_404(Post,
+#                                 id=id,
+#                                 translations__language_code=language,
+#                                 translations__slug=slug,
+#                                 available=True)
+#     # cart_product_form = CartAddProductForm()
+
+#     # r = Recommender()
+#     # recommended_products = r.suggest_products_for([product], 4)
+
+#     return render(request,
+#                   'blog/detail.html',
+#                   {'post': post,
+#                   # 'cart_product_form': cart_product_form,
+#                   # 'recommended_products': recommended_products 
+#                 })
+
+
+import random
+class detail(DetailView):
+  model = Post
+  template_name = 'blog/detail.html'
+  pk_url_kwarg = "id"
+  pk_url_kwargs = "slug"
+  # slug_field = "id" 
+  # query_pk_and_slug = True
+  def get_context_data(self, *args, **kwargs):
+    context = super(detail, self).get_context_data(*args, **kwargs)
+    instance = self.get_object()
+        #order_by("-title")
+    context["related"] = sorted(Post.objects.get_related(instance)[:6], key= lambda x: random.random())
+    return context
     # cart_product_form = CartAddProductForm()
 
     # r = Recommender()
     # recommended_products = r.suggest_products_for([product], 4)
 
-    return render(request,
-                  'blog/detail.html',
-                  {'post': post,
-                  # 'cart_product_form': cart_product_form,
-                  # 'recommended_products': recommended_products 
-                })
+    # return render(request,
+    #               'blog/detail.html',
+    #               {'post': post,
+    #               # 'cart_product_form': cart_product_form,
+    #               # 'recommended_products': recommended_products 
+    #             })
+    # model = Post
 
+    # # context_object_name = 'instance'
+    # template_name = 'blog/detail.html'
 
-
-
+    # #template_name = "<appname>/<modelname>_detail.html"
+    # def get_context_data(self, request, id, s *args, **kwargs):
+    #     context = super(detail, self).get_context_data(*args, **kwargs)
+    #     instance = self.get_object()
+    #     #order_by("-title")
+    #     context["related"] = sorted(Post.objects.get_related(instance)[:6], key= lambda x: random.random())
+    #     return context
 
 
 class PostEditView(UpdateView):
@@ -95,6 +147,8 @@ class PostDeletePost(DeleteView):
 #     model = Post
 #     # fields = '__all__'
 #     template_name = 'posts/post_create.html'
+
+
 
 
 

@@ -13,8 +13,12 @@ urlpatterns = [
          name='gallery_list_by_category'),
     path('gallery/<int:pk>/', views.gallery_detail, 
          name='gallery_detail'),
+
+    path('<art_id>', views.art_detail.as_view(), name="art"),
+    path('<slug:category_slug>/', views.art_detail.as_view(), 
+         name='categorylist'),
     # url(r'^gallery/(?P<gallery_title_slug>[\w\-]+)/', views.gallery_detail, name='gallery_detail'),
-    url(r'^art/(?P<art_id>[0-9]+)/$', views.art_detail, name='art'),
+    # url(r'^art/(?P<art_id>[0-9]+)/$', views.art_detail, name='art'),
    
     url(r'^subscribe/', views.subscribe, name = "subscribe"),
 

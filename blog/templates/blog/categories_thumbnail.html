@@ -1,14 +1,15 @@
-{% if  course.children.all %}
+{% block content %}
+{% if  post.children.all %}
     <h4>Sub Categories</h4>
-    {% for i in course.children.all %}
+    {% for i in post.children.all %}
         <a href="{{ i.slug }}"> {{ i.name }} </a><br>
     {% endfor %}
 
     <br><hr>
 {% endif %}
 
-{% if  course.course_set.all %}
- {% for i in course.course_set.all %}
+{% if  post.post_set.all %}
+ {% for i in post.post_set.all %}
   <h4>courses</h4>
  <div class="col s12 m4">
    <div class="card">
@@ -40,3 +41,4 @@
 
 {% endif %}
 </div>
+{% endblock %}

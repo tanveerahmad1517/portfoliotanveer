@@ -148,7 +148,7 @@ MEDIA_ROOT = (os.path.join(BASE_DIR, "media"))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'portfolio_dbdemo',
+        'NAME': 'myportfolio_db_db',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',

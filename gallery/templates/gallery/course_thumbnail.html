@@ -1,0 +1,34 @@
+
+<div class="demo-gallery">
+   
+            <ul id="lightgallery" class="list-unstyled row">
+
+                {% for r_art in related %}
+
+
+                <li data-responsive="img/1-375.jpg 375, {{ r_art.art.url }} 480, data-src="{{ r_art.art.url }}" data-sub-html="<h2> {{ r_art.title }} </h2> <h2> <p>{{ r_art.description|truncatechars:250 }} <h4><a href='{% url "gallery:art" art_id=r_art.id %}' target='_blank'>Go Detail</a>  <span> Or <a href='{{ r_art.link }}'>Visit Website</a></span></h4></p>" data-src="{{ r_art.art.url }}" data-sub-html="<h2> {{ r_art.title }} </h2> <h2> <p>{{ r_art.description|truncatechars:9 }} <h4><a href='{% url "gallery:art" art_id=r_art.id %}' target='_blank'>Go Detail</a>  <span> Or <a href='{{ r_art.link }}'>Visit Website</a></span></h4></p>">
+                      <div class="grid">
+          <figure class="effect-jazz">
+
+                        <img class="img-responsive" src="{{ r_art.art.url }}">
+                        <figcaption>
+
+              <p> {{ r_art.title }} </p>
+              <p> <span> {{ r_art.gcategory }} </span> </p>
+
+             
+          </figcaption></figure>
+
+                   
+                </li>
+                
+
+       
+                 {% endfor %}
+        </div>
+            </ul>
+</div>
+
+
+
+        

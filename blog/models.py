@@ -10,7 +10,8 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
-
+import cloudinary
+from cloudinary.models import CloudinaryField
 class PostManager(models.Manager):
     def get_related(self, instance):
         post_one = self.get_queryset().filter(category=instance.category)
@@ -51,7 +52,7 @@ class Post(models.Model):
                                  related_name='category',
                                  null=True, blank=True,
                                  on_delete=models.SET_NULL)
-    image = models.ImageField(upload_to='products/%Y/%m/%d',
+    image = CloudinaryField(upload_to='post_image/%Y/%m/%d',
                               blank=True)
 
     available = models.BooleanField(default=True)

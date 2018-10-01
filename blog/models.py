@@ -52,7 +52,7 @@ class Post(models.Model):
                                  related_name='category',
                                  null=True, blank=True,
                                  on_delete=models.SET_NULL)
-    image = CloudinaryField(upload_to='post_image/%Y/%m/%d',
+    image = CloudinaryField("post_image/%Y/%m/%d",
                               blank=True)
 
     available = models.BooleanField(default=True)

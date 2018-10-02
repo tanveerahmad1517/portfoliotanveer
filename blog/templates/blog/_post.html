@@ -19,7 +19,7 @@
                   <div class="post_image"> <a href="{{ post.get_absolute_url  }}"><img src="{{ post.image.url }}"> </a> </div>
                   <p> {{ post.description|slice:"430" | safe}}  <a href="{{ post.get_absolute_url  }}">Read More </a> </p>
 
-                </div>
+                
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                   <div class="avatar"> 
                         <a href="{% url 'posts:profile' post.user.username %}"> <img src="{{ post.user.profile.get_picture.url }}" alt="..." class="img-fluid"></div>
@@ -28,7 +28,7 @@
                   </div></a>
                   <div class="date"> <i class="far fa-clock"> </i> <time> {{ post.date|naturaltime }}  </time> 
                   </div>
-
+                </div>
                   
                 </footer>
                 
@@ -36,7 +36,7 @@
 
 
   {% endfor %}
-</div></div>
+</div>
 <div class="col-sm-2 col-md-2 post_col">
     <div id="sidebar">
     <h3>Categories</h3>

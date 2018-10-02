@@ -4,6 +4,19 @@ body {
     font-family: "Open Sans",sans-serif !important;
 }
 
+footer {
+    width: 100%;
+    background: #Efe2b9 !important;
+    margin-top: 7%;
+    padding-top: 27px;
+    padding-bottom: 24px;
+}
+input#email_id {
+    width: 47%;
+    float: left;
+    margin-right: 9px;
+}
+
 body.home p, h1, h2, h3, h4, h5, span {
     font-family: sans-serif;
 }
@@ -54,8 +67,9 @@ i.fas.fa-angle-up:hover {
 }
 
 .breadcrumb {
-    padding: 0px 0px 0px 0px;
+    padding: 7px 0px 7px 8px;
 }
+
 ul.breadcrumb li {
     padding: 15px 0px 0px 9px;
 }
@@ -164,8 +178,8 @@ a.navbar-brand.changeFont {
 }
 
 footer {
-    margin: 50px 0;
-    padding: 15px;
+    width: 100%;
+    background: #Efe2b9 !important;
 }
 
 /* move pics in carousel to center */

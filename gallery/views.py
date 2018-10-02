@@ -5,6 +5,8 @@ from .models import Gallery_Category, Artwork, Subscribe
 from blog.utils import SendSubscribeMail
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import DetailView
+
+
 # def galleries(request):
 #     gallery_groups = GalleryGroup.objects.all().order_by('title')
 #     return render(request, 'gallery/galleries.html', {'galleryGroups': gallery_groups})

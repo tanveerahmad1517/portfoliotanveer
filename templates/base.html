@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
-  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> 
+  
     <title>Tanveer Ahmed</title>
 
 
@@ -30,9 +30,6 @@
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Example</title>
  
-
-
-
 
 
 <!-- Portfolio Filter Tabs -->
@@ -213,13 +210,11 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.0/masonry.pkgd.min.js"></script>
     <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="{% static 'js/myScript.js' %}"></script>
-  
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> 
 
 <!-- Smoothe Scrol -->
-<script>
+    <script>
 
       // Instantiate Scrolls
       var scroll = new SmoothScroll('a[href*="#"]:not([data-easing])');
@@ -252,12 +247,23 @@
       document.addEventListener('scrollCancel', logScrollEvent, false);
     </script>
 <!-- End Smooth Scrol -->
+</div></div></div></div>
+</div></div></div>
+<footer>
+<div class="container">
+  <div class="row footer">
 
- <footer>
+  <div class="col-sm-4 col-md-4">
         <p>&copy; 2018 Tanveer Ahmed</p>
-      </footer>
+    
      <a class="pull-right" href="#"> <i class="fas fa-angle-up"> </i></a>
+</div>
+<div class="col-sm-8 col-md-8">
+{% include 'index.html' %}
+</div>
 
+</div></div>
+</footer>
 {% block script %}
 {% endblock %}
   </body>

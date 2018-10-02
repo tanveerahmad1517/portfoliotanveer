@@ -10,7 +10,7 @@ import cloudinary
 # Create your models here.
 from cloudinary.models import CloudinaryField
 from parler.models import TranslatableModel, TranslatedFields
-
+from tinymce import HTMLField
 
 class ArtManager(models.Manager):
     def get_related(self, instance):
@@ -62,7 +62,7 @@ class Gallery_Category(TranslatableModel):
 
 class Artwork(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    description = HTMLField('Description')
     link = models.URLField(max_length=200)
     published_date = models.DateTimeField(default=timezone.now)
     art = CloudinaryField("art")

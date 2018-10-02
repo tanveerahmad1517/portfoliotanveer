@@ -12,6 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 import cloudinary
 from cloudinary.models import CloudinaryField
+from tinymce import HTMLField
+
 class PostManager(models.Manager):
     def get_related(self, instance):
         post_one = self.get_queryset().filter(category=instance.category)
@@ -46,7 +48,7 @@ class Category(TranslatableModel):
 class Post(models.Model):
     title = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)
-    description = models.TextField(blank=True)
+    description = HTMLField('Description')
     user =   models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     category = models.ForeignKey(Category,
                                  related_name='category',

@@ -13,12 +13,19 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 import cloudinary
 import django_heroku
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 #from settings_secret import *
 
-SECRET_KEY = 'sfm=ot(!sqi&!y%66+e+#4m$1o&l%(l(w#vz$=_0c$5+#m*9yk'
+SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = []
 
@@ -42,6 +49,7 @@ INSTALLED_APPS = (
 
 #Modules
     'tinymce',
+    'filebrowser',
     'storages',
     'cloudinary',
     'mptt',
@@ -54,13 +62,14 @@ INSTALLED_APPS = (
 
 
 cloudinary.config(
-    cloud_name = "tanveerobjects",
-    api_key = "367622187743427",
-    api_secret = "m7-oA8baCn7jpHiu7CbBEgxDmoo"
+    cloud_name = env("cloud_name"),
+    api_key = env("api_key"),
+    api_secret = env("api_secret")
 )
 
-MAILCHIMP_API_KEY = "605ad21041e5599455b36bbe7c3530cc-us19"
-MAILCHIMP_SUBSCRIBE_LIST_ID = "15f45e1377"
+MAILCHIMP_API_KEY = env("MAILCHIMP_API_KEY")
+MAILCHIMP_SUBSCRIBE_LIST_ID = env("MAILCHIMP_SUBSCRIBE_LIST_ID")
+
 
 
 
@@ -166,6 +175,9 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = []
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
+
 STATIC_ROOT = 'staticfiles'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
@@ -233,8 +245,8 @@ TINYMCE_DEFAULT_CONFIG = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = 'peacetan'
-EMAIL_HOST_USER = 'adeelali.objects@gmail.com'
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

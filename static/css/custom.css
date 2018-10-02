@@ -10,6 +10,7 @@ body {
     margin-top: 7%;
     padding-top: 27px;
     padding-bottom: 24px;
+    margin-bottom: 0px;
 }
 input#email_id {
     width: 47%;
@@ -388,6 +389,7 @@ footer.post-footer.d-flex.align-items-center {
 
 .post_col {
     margin-bottom: 51px;
+    margin-top: 22px;
 }
   
 .cover_img img {

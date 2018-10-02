@@ -17,7 +17,7 @@
                 <div class="card-content">
                  <a href="{{ post.get_absolute_url  }}">  <h3>{{ post.title|slice:"70" }} </h3> </a>
                   <div class="post_image"> <a href="{{ post.get_absolute_url  }}"><img src="{{ post.image.url }}"> </a> </div>
-                  <p> {{ post.description | safe |slice:"430"  }} <a href="{{ post.get_absolute_url  }}">Read More </a></p> 
+                  <p> {{ post.description|slice:"430" | safe}}  <a href="{{ post.get_absolute_url  }}">Read More </a> </p>
 
                 </div>
                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">

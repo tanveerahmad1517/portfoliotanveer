@@ -4,7 +4,7 @@ body {
     font-family: "Open Sans",sans-serif !important;
 }
 
-footer {
+.bottomfooter {
     width: 100%;
     background: #Efe2b9 !important;
     margin-top: 7%;
@@ -178,8 +178,8 @@ a.navbar-brand.changeFont {
 }
 
 footer {
-    width: 100%;
-    background: #Efe2b9 !important;
+    margin: 50px 0;
+    padding: 15px;
 }
 
 /* move pics in carousel to center */
@@ -407,7 +407,7 @@ footer.post_header_profile ul li {
 footer.post_header_profile {
     float: right;
     position: relative;
-    right: 47%;
+    right: 37%;
     top: 134px;
     margin: 0;
     padding: 0;

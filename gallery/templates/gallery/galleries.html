@@ -44,7 +44,7 @@
                 {% for artwork in artwork %}
 
 
-                <li data-responsive="img/1-375.jpg 375, {{ artwork.art.url }} 480, data-src="{{ artwork.art.url }}" data-sub-html="<h2> {{ artwork.title }} </h2> <h2> <p>{{ artwork.description|truncatechars:250 }} <h4><a href='{% url "gallery:art" art_id=artwork.id %}' target='_blank'>Go Detail</a>  <span> Or <a href='{{ artwork.link }}'>Visit Website</a></span></h4></p>" data-src="{{ artwork.art.url }}" data-sub-html="<h2> {{ artwork.title }} </h2> <h2> <p>{{ artwork.description|truncatechars:250 }} <h4><a href='{% url "gallery:art" art_id=artwork.id %}' target='_blank'>Go Detail</a>  <span> Or <a href='{{ artwork.link }}'>Visit Website</a></span></h4></p>">
+                <li data-responsive="img/1-375.jpg 375, {{ artwork.art.url }} 480, data-src="{{ artwork.art.url }}" data-sub-html="<h2> {{ artwork.title }} </h2> <h2> <p>{{ artwork.description|truncatechars:384 }} <h4><a href='{% url "gallery:art" art_id=artwork.id %}' target='_blank'>Go Detail</a>  <span> Or <a href='{{ artwork.link }}'>Visit Website</a></span></h4></p>" data-src="{{ artwork.art.url }}" data-sub-html="<h2> {{ artwork.title }} </h2> <h2> <p>{{ artwork.description|truncatechars:250 }} <h4><a href='{% url "gallery:art" art_id=artwork.id %}' target='_blank'>Go Detail</a>  <span> Or <a href='{{ artwork.link }}'>Visit Website</a></span></h4></p>">
                       <div class="grid">
           <figure class="effect-jazz">
 

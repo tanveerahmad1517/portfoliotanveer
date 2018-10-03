@@ -5,11 +5,13 @@ body {
 }
 
 
-.lg-sub-html h2, p, span {
+.lg-sub-html h2, span {
     text-align: left;
     color: #fff !important;
 }
-
+span.breadcrumb-item.active {
+    color: #000 !important;
+}
 
 .row.nomargin.nopading {
     margin: 0px;

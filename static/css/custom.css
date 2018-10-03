@@ -11,6 +11,9 @@ body {
 span.breadcrumb-item.active {
     color: #000 !important;
 }
+.demo-gallery h2 {
+    text-align: left;
+}
 
 .row.nomargin.nopading {
     margin: 0px;

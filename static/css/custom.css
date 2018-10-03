@@ -7,7 +7,6 @@ body {
 
 .lg-sub-html h2, span {
     text-align: left;
-    color: #fff !important;
 }
 span.breadcrumb-item.active {
     color: #000 !important;

@@ -1,67 +1,15 @@
-{% extends 'base.html' %}
-{% block title %} {{ post.title }} {% endblock %}
-{% load namify %}
 {% block content %}
 {% load humanize %}
 
-<div class="container">
-  <div class="row">
-
-
-
-{% if  post.children.all %}
-    <h4>Sub Categories</h4>
-    {% for i in post.children.all %}
-        <a href="{{ i.slug }}"> {{ i.name }} </a><br>
-    {% endfor %}
-
-   <hr>
-{% endif %}
-
-{% if  post.post_set.all %}
- {% for post in post.post_set.all %}
-
-
-
-
-
-
-
-  <div class="col-sm-8 col-md-8 post_col">
-                <div class="card-content">
-                 <a href="{% url 'posts:detail' post.pk  %}">  <h3 class="header">{{ post.title|slice:"70" }} </h3> </a>
-                  <div class="post_image"> <a href="{% url 'posts:detail' post.pk  %}"><img src="{{ post.image.url }}"> </a> </div>
-                  <p> {{ post.description | safe |slice:"430"  }} <a href="{% url 'posts:detail' post.pk  %}">Read More </a></p> 
-
-                </div>
-                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                  <div class="avatar"> 
-                        <a href="{% url 'posts:profile' post.user.username %}"> <img src="{{ post.user.profile.get_picture.url }}" alt="..." class="img-fluid"></div>
-                    <div class="title"><span>{{ post.user.profile.get_screen_name }} 
-                        </a></span>
-                  </div></a>
-                  <div class="date"> <i class="far fa-clock"> </i> <time> {{ post.date|naturaltime }}  </time> </div>
-                  
-                </footer>
-                <div class="card-action">
-  </div>  
-
-
-
-
-
-
-</div>
-
-{% if forloop.counter|divisibleby:3 and not forloop.last %}
-        </div><br><div class="row">
-      {% endif %}
-  
-{% endfor %}
-
-{% endif %}
-</div>
-
-
+    <ul>
+      <li {% if not category %}class="selected"{% endif %}>
+        <a href="{% url 'posts:all' %}">All</a>
+      </li>
+      {% for c in categories %}
+        <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+          <a href="{{ c.get_absolute_url }}">{{ c.name }} <span class="badge"> {{ c.post }} </span></a>
+        </li>
+      {% endfor %}
+    </ul>
 
 {% endblock %}

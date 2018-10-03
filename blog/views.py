@@ -14,6 +14,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from . import forms
+from django.db .models import Count
 
 # class AllPostList(ListView):
 #     model = Post
@@ -37,7 +38,8 @@ def profile(request, username):
 class post_list(ListView):
   def get(self, request, category_slug=None):
     category = None
-    categories = Category.objects.all()
+    categories = Category.objects.all().prefetch_related('category')
+    categories = categories.annotate(post=Count('category'))
     post = Post.objects.filter(available=True)
     if category_slug:
       language = request.LANGUAGE_CODE

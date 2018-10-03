@@ -5,6 +5,8 @@
 {% load static from staticfiles %}
 {% load namify %}
 {% load urlify %}
+{% block title %} Blog Posts List {% endblock %}
+
 
 {% block content %}
 <div class="container">
@@ -46,7 +48,7 @@
       </li>
       {% for c in categories %}
         <li {% if category.slug == c.slug %}class="selected"{% endif %}>
-          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+          <a href="{{ c.get_absolute_url }}">{{ c.name }} <span class="badge"> {{ c.post }} </span></a>
         </li>
       {% endfor %}
     </ul>

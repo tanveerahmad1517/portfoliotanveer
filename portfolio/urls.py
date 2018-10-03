@@ -18,9 +18,10 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('success/', views.successView, name='success'),
     path('aboutMe/', views.about_me, name="aboutMe"),
-    path('', include('gallery.urls')),
+    path('portfolio/', include('gallery.urls')),
     path('blog/', include('blog.urls')),
     path('account/', include('account.urls')),
+    path('', views.home, name='home'),
 
 ]
     

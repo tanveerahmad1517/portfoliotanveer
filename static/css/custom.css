@@ -4,6 +4,29 @@ body {
     font-family: "Open Sans",sans-serif !important;
 }
 
+
+
+.row.nomargin.nopading {
+    margin: 0px;
+    padding: 0px;
+    margin-top: 52px;
+}
+.nomargin.nopading h1, h2 {
+    width: 100%;
+    text-align:center;
+
+}
+i.far.fa-clock {
+    font-size: inherit;
+}
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.nopadding {
+    padding: 0px;
+}
+
 .bottomfooter {
     width: 100%;
     background: #Efe2b9 !important;
@@ -11,6 +34,12 @@ body {
     padding-top: 27px;
     padding-bottom: 24px;
     margin-bottom: 0px;
+}
+span.badge {
+    background: #e26a6f;
+    border-radius: 50%;
+    color: #fff;
+    float: right;
 }
 input#email_id {
     width: 47%;
@@ -28,6 +57,9 @@ p {
 }
 .related-posts {
     margin-top: 39px;
+}
+.subscribe_form H3 {
+    margin: 2px 0px 10px 0px;
 }
 
 .row.its.row img {
@@ -64,7 +96,6 @@ i.fas.fa-angle-up {
     content: "\f106";
     margin-top: 29px !important;
     position: relative;
-    top: 9px;
     font-size: 24px;
     color: #fff;
 }
@@ -79,6 +110,11 @@ i.fas.fa-angle-up:hover {
 ul.breadcrumb li {
     padding: 15px 0px 0px 9px;
 }
+
+i.fas.fa-home, i.fab.fa-blogger-b, i.fas.fa-phone-volume {
+    font-size: 15px;
+}
+
 .customclass p {
     margin: 0px;
 }
@@ -115,11 +151,20 @@ div#jssor_1 {
 }
 .fa, .fab, .fal, .far, .fas {
     margin-right: 5px;
+    font-size: 15px;
 }
 .demo-gallery > ul > li img {
     width: 100%;
 }
 
+.followme {
+    text-align: center;
+    margin-top: 13px;
+}
+.followme .fa, .fab, .fal, .far, .fas{
+    margin-right: 5px;
+    font-size: 37px;
+}
 
 .demo-gallery > ul > li {
     margin-bottom: -15px;
@@ -327,9 +372,7 @@ p.pprewviwsnext {
     margin: 0px;
     top: 250px;
 }
-.row.its.row h1, h2, h3{
-        margin-left: 15px;
-}
+
 a.btn.btn-lg.btn-primary.btn-custom.pull-right {
     float: right;
 }

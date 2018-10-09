@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'blog',
     # 'menu',
     'account',
+    'searches',
 
 #Modules
     'tinymce',

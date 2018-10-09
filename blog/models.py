@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.models import User
 from parler.models import TranslatableModel, TranslatedFields
-
+from django.db.models import Q
 
 from django.db.models.signals import post_save
 from django.utils.encoding import python_2_unicode_compatible
@@ -15,10 +15,20 @@ from cloudinary.models import CloudinaryField
 from tinymce import HTMLField
 
 class PostManager(models.Manager):
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query is not None:
+            or_lookup = (Q(title__icontains=query) | 
+                         Q(description__icontains=query)|
+                         Q(slug__icontains=query)
+                        )
+            qs = qs.filter(or_lookup).distinct() # distinct() is often necessary with Q lookups
+        return qs
     def get_related(self, instance):
         post_one = self.get_queryset().filter(category=instance.category)
         qs = (post_one).exclude(id=instance.id).distinct()
         return qs
+
 
 
 
@@ -30,6 +40,7 @@ class Category(TranslatableModel):
                                     db_index=True,
                                     unique=True)
         )
+   
 
     class Meta:
         # ordering = ('name',)

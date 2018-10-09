@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}
+	Result for | {{query}} 
+{% endblock %}
+asd
+{% block content %}
+<div class="container">
+<div class="row">
+
+
+
+
+		{% if search_profile != None %}
+		<div class="card card-inverse card-success text-xs-center">
+			<a href="/accounts/profile/user/{{search_profile.username}}" style="text-decoration: none;">
+			<div class="card-block">
+				<blockquote class="card-blockquote">
+					<p>{{search_profile.username.last_name}} {{search_profile.last_name}} {{search_profile.username}}</p>
+				</blockquote>
+			</div>
+			</a>
+
+		{% else %}
+			{% for person in people %}
+			<div class="card card-inverse card-success text-xs-center">
+			<a href="/accounts/profile/user/{{person.username}}" style="text-decoration: none;">
+			<div class="card-block">
+				<h3 class="card-title">{{person.first_name}} {{person.last_name}}</h3>
+				<p class="card-text">{{person.location}}</p>
+			</div>
+			</a>
+		</div>
+			{% endfor %}
+		{% endif %}
+		
+				<ul class="list-group">
+					<div class="card">
+					{% for chirp_data in search_data %}
+					<div class="search_data">
+					<li class="list-group-item">
+						<h5 class="list-group-item-heading">
+
+							
+               
+                	<a href="{{ chirp_data.get_absolute_url }}">{{ chirp_data.user.title }}
+                    {% if chirp_data.user.is_verified %}<i class="fa fa-check btn-primary img-circle"></i>{% endif %}
+                
+						
+							<h1> {{ chirp_data.title }}</h1></a>
+							<p> {{ chirp_data.description |safe }}</p>
+						</li>
+					</h5></li></ul>
+   
+                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="avatar"> 
+                        <a href="{% url 'posts:profile' chirp_data.user.username %}"> <img src="{{ chirp_data.user.profile.get_picture.url }}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{ chirp_data.user.profile.get_screen_name }} 
+                        </a></span>
+                  </div></a>
+                   <div class="date"> <i class="far fa-clock"> </i> <time> {{ chirp_data.date|naturaltime }}  </time> 
+                  </div>
+                 
+                </footer>
+
+
+						{% endfor %}
+
+</a></footer></div>
+</div>
+<div class="card">
+	
+{% for artwork in artwork_data %}
+<div class="search_data">
+<h1> {{ artwork.title }} </h1>
+<p> {{ artwork.description|slice:":440" |safe}} <a href='{% url "gallery:art" art_id=artwork.id %}' target='_blank'>  Read More </a> </p> 
+</div>
+{% endfor %}
+
+
+</div>
+</div>
+	<div class="row">
+
+					<div class="card">
+						{% for chirp_data in search_dataa %}
+						<div class="search_data">
+						
+						
+							
+<a href="{{ chirp_data.get_absolute_url  }}"">
+	<h1>
+								{{chirp_data.name}} </h1>
+				</div>
+						{% endfor %}
+					</div>
+					</ul>
+			</div>
+		</div>
+
+		</div>
+	</div></a></div>
+	{% endblock %}

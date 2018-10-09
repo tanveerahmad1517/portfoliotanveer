@@ -19,6 +19,7 @@ urlpatterns = [
 
     path('<int:id>/<slug:slug>/', views.detail.as_view(),
          name='detail'),  
+     path('search', views.search, name='search'),
 
     
     # path('posts/', views.posts, name='all'),

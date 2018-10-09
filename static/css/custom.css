@@ -51,9 +51,12 @@ span.badge {
     float: right;
 }
 input#email_id {
-    width: 47%;
+    width: 54%;
     float: left;
     margin-right: 9px;
+}
+.form-actions button.btn.btn-primary {
+    width: 100%;
 }
 .card-content {
     margin-bottom: 34px;
@@ -187,9 +190,52 @@ div#categories {
     text-align: center;
     margin-bottom: 0px;
     padding: 0px;
+    width: 97%;
 }
+
+.form-main {
+  margin-top: 0px;
+}
+
+input[type="text"] {
+   
+    padding: 6px;
+    margin: 0px;
+    width: 261px;
+}
+input#id_contact_name {
+    width: 100%;
+    padding: 6px;
+    margin: 0px;
+}
+
+[type=reset], [type=submit], button, html [type=button] {
+    -webkit-appearance: button;
+    float: right;
+    padding: 6px 10px;
+    background: #e26a6f;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+i.fa.fa-search {
+    color: #fff;
+}
+
+
+
 div#categories ul {
     margin-bottom: 0px;
+}
+.search_data {
+    border-top: 1px solid #E0E0E0;
+    border-bottom: 1px solid #E0E0E0;
+}
+.search_data h1, h2, h3, h4, h5 {
+    margin-left: 14px;
+}
+.card {
+    margin: 0 auto;
 }
 
 figure.effect-jazz p {

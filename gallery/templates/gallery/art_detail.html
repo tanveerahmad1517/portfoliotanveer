@@ -36,7 +36,7 @@
 
                 <h3>  <a href="{{ artwork.link }}" target="_blank"> Visit Website  </a></h3>
                 <h1> {{ artwork.title }} - {{ artwork.published_date.year }}</h1>
-                <p>{{ artwork.description|linebreaks }} </p>
+                <p>{{ artwork.description|safe }} </p>
                 
             </div>
              <h1> Related Portfolio </h1>

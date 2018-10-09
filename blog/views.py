@@ -15,6 +15,10 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from . import forms
 from django.db .models import Count
+import re
+from account.models import Profile
+from django.db.models import Q
+from gallery.models import Artwork, Gallery_Category
 
 # class AllPostList(ListView):
 #     model = Post
@@ -156,3 +160,35 @@ class PostDeletePost(DeleteView):
 
 
 
+
+
+def search(request):
+    query = request.GET.get('search')
+    if str(query) is '':
+        return HttpResponseRedirect('/')
+    pat = re.compile(r'[@](\w+)')
+    attags = pat.finditer(query)
+    search_profile = None
+    for attag in attags:
+        try:
+            search_profile = User.objects.get(username = attag.group()[1:])
+            return HttpResponseRedirect('/accounts/profile/user/%s'%search_profile.username)
+        except ObjectDoesNotExist:
+            search_profile = None
+        break
+    
+    search_data = Post.objects.filter(Q(title__icontains=query) |
+                                      Q(description__icontains=query))
+    search_dataa = Category.objects.filter(Q(translations__name__icontains=query) 
+                                          
+
+      )
+    people = User.objects.filter(first_name__icontains=query).order_by('-first_name')
+    artwork_data = Artwork.objects.filter(Q(title__icontains=query) |
+                                          Q(description__icontains=query)
+      )
+    artworkcat_data = Gallery_Category.objects.filter(Q(translations__name__icontains=query)
+                                          
+      )
+    return render(request, 'blog/search_results.html', {'search_data':search_data, 'search_dataa':search_dataa, 'query':query, 'search_profile':search_profile, 'people': people, 'artwork_data':artwork_data})
+    #We can differenitate here on the basis of the search query we have got like @ and # or any other textual query

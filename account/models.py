@@ -3,11 +3,22 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from cloudinary.models import CloudinaryField
+from django.db.models import Q
 
 GENDER_CHOICES = (
     ('Male', 'Male'),
     ('Female', 'Female'),
 )
+
+class AccountManager(models.Manager):
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query is not None:
+            or_lookup = (Q(user__icontains=query)
+                        
+                        )
+            qs = qs.filter(or_lookup).distinct() # distinct() is often necessary with Q lookups
+        return qs
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -16,6 +27,9 @@ class Profile(models.Model):
     job_title = models.CharField(max_length=50, null=True, blank=True)
     get_picture = CloudinaryField('Profile_pictures', default='user.png', null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, blank=True)
+    
+    objects = AccountManager()
+
     @property
     def image_url(self):
         if self.get_picture and hasattr(self.get_picture, 'url'):

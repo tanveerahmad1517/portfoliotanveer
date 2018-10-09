@@ -22,6 +22,8 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('account/', include('account.urls')),
     path('', views.home, name='home'),
+    path('', include('searches.urls')),
+    
 
 ]
     

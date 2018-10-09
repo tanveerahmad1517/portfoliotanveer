@@ -28,7 +28,7 @@
                           "csrfmiddlewaretoken" : csrfmiddlewaretoken};
         $.ajax({
           type : 'POST',
-          url :  '/subscribe/',
+          url :  'portfolio/subscribe/',
           data : email_data,
           success : function(response){
             $('#email_id').val(''); 

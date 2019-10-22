@@ -20,7 +20,7 @@ jsmin==2.2.2
 mailchimp==2.0.9
 mock==2.0.0
 pbr==4.2.0
-Pillow==5.2.0
+Pillow==6.2.0
 pipenv==2018.7.1
 post==1.0.2
 psycopg2==2.7.5
